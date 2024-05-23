@@ -1,0 +1,43 @@
+<h1>Todos vbvv</h1>
+
+<table>
+    <thead>
+        <tr>
+            
+            <th scope="col">usuario</th>
+            <th scope="col">senha</th>
+            <th scope="col">departamento</th>
+            <th scope="col">editar</th>
+            <th scope="col">excluir</th>
+        </tr>
+
+
+        <tbody>
+            
+            {% for usuario in usuarios %}
+            
+
+          
+            <tr>
+                
+                <td><small>{{usuario.Usuario}}</small></td>
+                <td><small>{{usuario.Senha_do_usuario}}</small></td>
+                <td><small>{{usuario.Departamento}}</small></td>
+                <td><small><a href="{% url 'atualiza_usuarios' usuario.pk %}">editar</a></small></td>
+                <td><small><a href="{% url 'exclui_usuarios' usuario.pk %}">excluir</a></small></td>
+
+            </tr>
+            
+            {% endfor %}
+
+        </tbody>
+
+
+
+
+
+    </thead>
+
+
+
+</table>

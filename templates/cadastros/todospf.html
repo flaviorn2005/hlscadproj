@@ -1,0 +1,44 @@
+<h1>Todos </h1>
+<a href="{% url 'cadastro_planofinanceiro' %}">cadastra planos financeiros</a><br>
+<a href="{% url 'cadastro_usuario' %}">cadastra usuario</a><br>
+<a href="{% url 'todos_planosfinanceiros' %}">mostra todos planos financeiros</a><br>
+<a href="{% url 'todos_usuarios' %}">mostra todos usuarios</a><br>
+<table>
+    <thead>
+        <tr>
+            
+            <th scope="col">plano_financeiro</th>
+            <th scope="col">departamento</th>
+            <th scope="col">editar</th>
+            <th scope="col">excluir</th>
+        </tr>
+
+
+        <tbody>
+            
+            {% for planosfinanceiro in planosfinanceiros %}
+            
+            
+            <tr>
+                
+                <td><small>{{planosfinanceiro.Plano_financeiro}}</small></td>
+                <td><small>{{planosfinanceiro.Departamento}}</small></td>
+
+                <td><small><a href="{% url 'atualiza_planosfinanceiros' planosfinanceiro.pk %}">editar</a></small></td>
+                <td><small><a href="{% url 'exclui_planosfinanceiros' planosfinanceiro.pk %}">excluir</a></small></td>
+
+            </tr>
+            
+            {% endfor %}
+
+        </tbody>
+
+
+
+
+
+    </thead>
+
+
+
+</table>
