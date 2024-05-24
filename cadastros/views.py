@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .models import PlanoFinanceiro, Usuario
 from .form import PlanofinanceiroForm, UsuarioForm
 
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -116,4 +117,51 @@ def exclui_usuarios(request, pk):
     return redirect('todos_usuarios')
 
 
+def apiuser(request, loginuser):
+    resultados = Usuario.objects.filter(Ativo=True, Usuario=loginuser)
+    #print(request.headers.get('senha'))
+    if request.method == 'GET' and request.headers.get('senha') == 'qweasd':
+        if resultados:
+            print(resultados[0].Departamento)
 
+            resultadosjson = [{
+                'departamento': resultados[0].Departamento,
+                'senha': resultados[0].Senha_do_usuario,
+                
+            }]
+            
+            return JsonResponse(resultadosjson, safe=False)
+        else:
+            resultadosjson = [{
+                'departamento': 'erro',
+                'senha': 'erro',
+                
+            }]
+            return JsonResponse(resultadosjson, safe=False)
+    else:
+        return HttpResponse('Não permitido')
+
+    
+def apiplanofinanceiro(request, departamento):
+    # resultados = PlanoFinanceiro.objects.all().values('Plano_financeiro', 'Departamento')
+    resultados = PlanoFinanceiro.objects.filter(Ativo=True, Departamento=departamento)
+    lista_planos = []
+    for plano in resultados:
+        lista_planos.append(plano.Plano_financeiro)
+
+    #resultados_list = list(resultados)
+    #print(request.headers.get('senha'))
+    if request.method == 'GET' and request.headers.get('senha') == 'qweasd':
+        if resultados:
+            return JsonResponse(lista_planos, safe=False)
+        else:
+            resultadosjson = [{
+                'departamento': 'erro',
+                'senha': 'erro',
+                
+            }]
+            return JsonResponse(resultadosjson, safe=False)
+    else:
+        return HttpResponse('Não permitido')
+
+    

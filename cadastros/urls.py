@@ -11,6 +11,6 @@ urlpatterns = [
     path('todos_usuarios/', views.todos_usuarios, name='todos_usuarios'),
     path('atualiza_usuarios/<int:pk>/', views.atualiza_usuarios, name='atualiza_usuarios'),
     path('exclui_usuarios/<int:pk>/', views.exclui_usuarios, name='exclui_usuarios'),
-
-
+    path('apiuser/<str:loginuser>/', views.apiuser, name='apiuser'),
+    path('apiplanofinanceiro/<str:departamento>/', views.apiplanofinanceiro, name='apiplanofinanceiro'),
 ]
